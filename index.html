@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para o Meu Amor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cor-fundo: #fdf0f0;
+            --cor-principal: #d63384;
+            --cor-texto: #4a4a4a;
+            --cor-detalhe: #ff758f;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        header { padding: 40px 20px; }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            color: var(--cor-principal);
+            margin: 0;
+        }
+
+        #mensagem-especial {
+            display: none;
+            background: white;
+            border: 2px dashed var(--cor-principal);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 80%;
+            border-radius: 15px;
+            animation: bounce 2s infinite;
+        }
+
+        #contador {
+            display: flex; gap: 10px;
+            justify-content: center; flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .tempo-unidade {
+            background: white; padding: 15px;
+            border-radius: 12px; min-width: 70px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .tempo-valor {
+            display: block; font-size: 1.8rem;
+            font-weight: 600; color: var(--cor-principal);
+        }
+
+        .tempo-label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; }
+
+        .galeria {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; padding: 20px; max-width: 1000px; margin: 0 auto;
+        }
+
+        .foto-card {
+            background: white; padding: 10px; border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .foto-card:hover { transform: translateY(-10px) rotate(2deg); }
+
+        .foto-card img { width: 100%; height: 300px; object-fit: cover; border-radius: 5px; }
+
+        .surpresa-container { margin: 40px 0; position: relative; }
+
+        .botao-surpresa {
+            background-color: var(--cor-principal);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(214, 51, 132, 0.3);
+            transition: transform 0.2s, background 0.3s;
+            position: relative;
+            z-index: 10;
+        }
+
+        .botao-surpresa:hover {
+            background-color: var(--cor-detalhe);
+            transform: scale(1.05);
+        }
+
+        #frase-dinamica {
+            margin-top: 25px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--cor-principal);
+            min-height: 1.5rem;
+            font-style: italic;
+            transition: opacity 0.3s;
+        }
+
+        .carta-escondida {
+            display: none;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            line-height: 1.6;
+            color: var(--cor-texto);
+            animation: fadeIn 1.5s;
+        }
+
+        /* Ícone de Som */
+        #controle-musica {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            border: 1px solid var(--cor-fundo);
+        }
+
+        .heart {
+            position: fixed;
+            color: var(--cor-principal);
+            pointer-events: none;
+            z-index: 999;
+            animation: fly linear forwards;
+        }
+
+        @keyframes fly {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+        footer { padding: 50px; font-size: 0.8rem; color: var(--cor-detalhe); }
+    </style>
+</head>
+<body>
+
+    <audio id="musica-romantica" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Seu navegador não suporta áudio.
+    </audio>
+
+    <div id="controle-musica" onclick="toggleMusica()" title="Pausar/Tocar Música">
+        🎵
+    </div>
+
+    <header>
+        <div id="mensagem-especial">
+            <h2 id="texto-data-especial">🎉 Feliz Aniversário! 🎉</h2>
+            <p>Mais um marco na nossa linda caminhada juntos.</p>
+        </div>
+
+        <h1>Desde o dia em que começamos nossa história</h1>
+        <p style="letter-spacing: 2px; color: var(--cor-detalhe);">CADA SEGUNDO VALE A PENA</p>
+        
+        <div id="contador">
+            <div class="tempo-unidade"><span class="tempo-valor" id="dias">0</span><span class="tempo-label">Dias</span></div>
+            <div class="tempo-unidade"><span class="tempo-valor" id="horas">0</span><span class="tempo-label">Horas</span></div>
+            <div class="tempo-unidade"><span class="tempo-valor" id="minutos">0</span><span class="tempo-label">Minutos</span></div>
+            <div class="tempo-unidade"><span class="tempo-valor" id="segundos">0</span><span class="tempo-label">Segundos</span></div>
+        </div>
+    </header>
+
+    <div class="galeria">
+        <div class="foto-card"><img src="foto1.jpg" ></div>
+        <div class="foto-card"><img src="foto2.jpg" ></div>
+        <div class="foto-card"><img src="foto3.jpg" ></div>
+        <div class="foto-card"><img src="foto4.jpg" ></div>
+        <div class="foto-card"><img src="foto5.jpg"></div>
+        <div class="foto-card"><img src="foto6.jpg"></div>
+    </div>
+
+    <div class="surpresa-container">
+        <button class="botao-surpresa" onclick="revelarTudo()">Abrir Nossa Carta</button>
+        
+        <p id="frase-dinamica"></p>
+
+        <div id="carta" class="carta-escondida">
+            "Morzinho, desde que te conheci, minha vida tem sido muito melhor, obrigado por sempre estar ao meu lado e sempre me apoiar em tudo que faço, tenho certeza que fiz a melhor escolha de quem eu vou passar o resto da minha vida, eu te amo minha princesa!"
+        </div>
+    </div>
+
+    <footer>
+        ❤️ 12.04.2025 • Criado por Flávio ❤️
+    </footer>
+
+    <script>
+        const dataInicio = new Date(2025, 3, 12, 17, 0, 0).getTime(); 
+        const musica = document.getElementById('musica-romantica');
+
+        const frases = [
+            "Você é o amor da minha vida ❤️",
+            "Cada detalhe seu me faz te amar mais.",
+            "Obrigado por ser minha pessoa favorita no mundo todo.",
+            "Com você aprendi que lar não é só um local e sim uma pessoa.",
+            "Você é a resposta das minhas orações.",
+            "Minha tchutchuquinha.",
+            "Que bom que Deus uniu a gente.",
+            "Prometo cuidar de você pra sempre minha princesa.",
+            "Eu amo amar você! 🥰",
+            "Você me faz muito feliz, amo te ter."
+        ];
+
+        function atualizarContador() {
+            const agora = new Date();
+            const diferenca = agora.getTime() - dataInicio;
+
+            const d = Math.floor(diferenca / 86400000);
+            const h = Math.floor((diferenca % 86400000) / 3600000);
+            const m = Math.floor((diferenca % 3600000) / 60000);
+            const s = Math.floor((diferenca % 60000) / 1000);
+
+            document.getElementById('dias').innerText = d;
+            document.getElementById('horas').innerText = h;
+            document.getElementById('minutos').innerText = m;
+            document.getElementById('segundos').innerText = s;
+
+            if (agora.getDate() === 12) {
+                const banner = document.getElementById('mensagem-especial');
+                const textoBanner = document.getElementById('texto-data-especial');
+                banner.style.display = "block";
+                textoBanner.innerText = (agora.getMonth() === 3) 
+                    ? `🎉 Feliz ${agora.getFullYear() - 2025} Ano(s) de Namoro! 🎉`
+                    : "❤️ Feliz mais um mês juntos! ❤️";
+            }
+        }
+
+        function revelarTudo() {
+            const carta = document.getElementById('carta');
+            const campoFrase = document.getElementById('frase-dinamica');
+            
+            // Tocar música ao clicar
+            if (musica.paused) {
+                musica.play();
+            }
+
+            carta.style.display = "block";
+            
+            const novaFrase = frases[Math.floor(Math.random() * frases.length)];
+            campoFrase.innerText = novaFrase;
+
+            chuvaDeCoracoes();
+            carta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function toggleMusica() {
+            if (musica.paused) {
+                musica.play();
+            } else {
+                musica.pause();
+            }
+        }
+
+        function chuvaDeCoracoes() {
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = '100vh';
+                    heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+                    heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                    
+                    document.body.appendChild(heart);
+                    setTimeout(() => { heart.remove(); }, 5000);
+                }, i * 150);
+            }
+        }
+
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+    </script>
+</body>
+</html>
