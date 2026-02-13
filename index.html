@@ -15,7 +15,6 @@
             --transicao: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Modo Noturno Automático (após as 20h ou preferência do sistema) */
         @media (prefers-color-scheme: dark) {
             :root {
                 --cor-fundo: #2d1b24;
@@ -36,21 +35,9 @@
         }
 
         header { padding: 40px 20px; }
+        h1 { font-family: 'Dancing Script', cursive; font-size: clamp(2.5rem, 8vw, 4rem); color: var(--cor-principal); margin: 0; }
 
-        h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            color: var(--cor-principal);
-            margin: 0;
-        }
-
-        /* Prevenção de Layout Shift */
-        .banner-container {
-            min-height: 120px; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        .banner-container { min-height: 120px; display: flex; justify-content: center; align-items: center; }
 
         #mensagem-especial {
             display: none;
@@ -62,38 +49,23 @@
             animation: bounce 2s infinite, fadeIn 1s;
         }
 
-        #contador {
-            display: flex; gap: 10px;
-            justify-content: center; flex-wrap: wrap;
-            margin: 30px 0;
-        }
-
-        .tempo-unidade {
-            background: var(--cor-card); padding: 15px;
-            border-radius: 12px; min-width: 70px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .tempo-valor {
-            display: block; font-size: 1.8rem;
-            font-weight: 600; color: var(--cor-principal);
-        }
-
+        #contador { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 30px 0; }
+        .tempo-unidade { background: var(--cor-card); padding: 15px; border-radius: 12px; min-width: 70px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .tempo-valor { display: block; font-size: 1.8rem; font-weight: 600; color: var(--cor-principal); }
         .tempo-label { font-size: 0.7rem; text-transform: uppercase; opacity: 0.7; }
 
-        /* Galeria Estilo Polaroid */
         .galeria {
-            display: grid; 
+            display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px; 
-            padding: 20px; 
-            max-width: 1100px; 
+            gap: 25px;
+            padding: 20px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
         .foto-card {
-            background: white; 
-            padding: 12px 12px 35px 12px; /* Espaço maior embaixo estilo Polaroid */
+            background: white;
+            padding: 12px 12px 35px 12px;
             border-radius: 2px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             transition: var(--transicao);
@@ -101,15 +73,8 @@
         }
 
         .foto-card:hover { transform: scale(1.05) rotate(1deg); z-index: 5; }
+        .foto-card img { width: 100%; height: 250px; object-fit: cover; filter: sepia(20%); background-color: #eee; }
 
-        .foto-card img { 
-            width: 100%; 
-            height: 250px; 
-            object-fit: cover; 
-            filter: sepia(20%);
-        }
-
-        /* Lightbox (Foto Ampliada) */
         #lightbox {
             display: none;
             position: fixed;
@@ -120,11 +85,9 @@
             align-items: center;
             cursor: zoom-out;
         }
-
         #lightbox img { max-width: 90%; max-height: 80%; border: 5px solid white; }
 
         .surpresa-container { margin: 40px 0; }
-
         .botao-surpresa {
             background-color: var(--cor-principal);
             color: white;
@@ -138,15 +101,7 @@
             transition: var(--transicao);
         }
 
-        .botao-surpresa:hover { transform: scale(1.1); background-color: var(--cor-detalhe); }
-
-        #frase-dinamica {
-            margin-top: 25px;
-            font-weight: 600;
-            color: var(--cor-principal);
-            min-height: 1.5rem;
-            font-style: italic;
-        }
+        #frase-dinamica { margin-top: 25px; font-weight: 600; color: var(--cor-principal); min-height: 1.5rem; font-style: italic; transition: opacity 0.3s; }
 
         .carta-escondida {
             display: none;
@@ -171,17 +126,9 @@
             z-index: 1000; font-size: 1.5rem;
         }
 
-        .heart {
-            position: fixed; color: var(--cor-principal);
-            pointer-events: none; z-index: 999;
-            animation: fly linear forwards;
-        }
+        .heart { position: fixed; color: var(--cor-principal); pointer-events: none; z-index: 999; animation: fly linear forwards; }
 
-        @keyframes fly {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
-        }
-
+        @keyframes fly { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
@@ -203,8 +150,8 @@
     <header>
         <div class="banner-container">
             <div id="mensagem-especial">
-                <h2 id="texto-data-especial">❤️ Feliz nosso dia 12! ❤️ </h2>
-                <p>❤️ Mais um mês junto com o amor da minha vida! ❤️.</p>
+                <h2 id="texto-data-especial">❤️ Feliz nosso dia 12! ❤️</h2>
+                <p>Mais um mês junto com o amor da minha vida!</p>
             </div>
         </div>
 
@@ -220,14 +167,14 @@
     </header>
 
     <div class="galeria">
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto1.jpg"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto2.jpg"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto3.jpg"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto4.jpg"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto5.jpg"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto6.jpg"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto7.jpg"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto8.jpg"></div>
+        <div class="foto-card" onclick="ampliar(this)"><img src="foto1.jpg" loading="lazy"></div>
+        <div class="foto-card" onclick="ampliar(this)"><img src="foto2.jpg" loading="lazy"></div>
+        <div class="foto-card" onclick="ampliar(this)"><img src="foto3.jpg" loading="lazy"></div>
+        <div class="foto-card" onclick="ampliar(this)"><img src="foto4.jpg" loading="lazy"></div>
+        <div class="foto-card" onclick="ampliar(this)"><img src="foto5.jpg" loading="lazy"></div>
+        <div class="foto-card" onclick="ampliar(this)"><img src="foto6.jpg" loading="lazy"></div>
+        <div class="foto-card" onclick="ampliar(this)"><img src="foto7.jpg" loading="lazy"></div>
+        <div class="foto-card" onclick="ampliar(this)"><img src="foto8.jpg" loading="lazy"></div>
     </div>
 
     <div class="surpresa-container">
@@ -244,24 +191,23 @@
     </footer>
 
     <script>
-        // Usei ISO format para garantir compatibilidade de fuso horário
-        const dataInicio = new Date('2025-04-12T00:00:00'); 
+        const dataInicio = new Date('2025-04-12T00:00:00');
         const musica = document.getElementById('musica-romantica');
 
         const frases = [
             "Você é o amor da minha vida ❤️",
             "Cada detalhe seu me faz te amar mais.",
             "Obrigado por ser minha pessoa favorita no mundo todo.",
-            "Com você aprendi que lar não é só um local e sim uma pessoa.",
+            "Com você aprendi que lar não é só um pessoa.",
             "Você é a resposta das minhas orações.",
             "Minha tchutchuquinha.",
             "Que bom que Deus uniu a gente.",
             "Prometo cuidar de você pra sempre minha princesa.",
             "Eu amo amar você! 🥰",
             "Você me faz muito feliz, amo te ter.",
-            "Eu te amo muito muuito muito",        
-            "Minha denguinha",                     
-            "Minha princesa"                      
+            "Eu te amo muito muuito muito",
+            "Minha denguinha",
+            "Minha princesa"
         ];
 
         function atualizarContador() {
@@ -273,22 +219,24 @@
             const m = Math.floor((diferenca % 3600000) / 60000);
             const s = Math.floor((diferenca % 60000) / 1000);
 
-            document.getElementById('dias').innerText = d;
-            document.getElementById('horas').innerText = h;
-            document.getElementById('minutos').innerText = m;
-            document.getElementById('segundos').innerText = s;
+            if(document.getElementById('dias')) {
+                document.getElementById('dias').innerText = d;
+                document.getElementById('horas').innerText = h;
+                document.getElementById('minutos').innerText = m;
+                document.getElementById('segundos').innerText = s;
+            }
 
-            // Lógica de Banner Melhorada
             if (agora.getDate() === 12) {
                 const banner = document.getElementById('mensagem-especial');
                 const textoBanner = document.getElementById('texto-data-especial');
-                const meses = (agora.getFullYear() - dataInicio.getFullYear()) * 12 + (agora.getMonth() - dataInicio.getMonth());
-                
-                banner.style.display = "block";
-                if (meses > 0 && meses % 12 === 0) {
-                    textoBanner.innerText = `🎉 Feliz ${meses/12} Ano(s) de Namoro! 🎉`;
-                } else {
-                    textoBanner.innerText = "❤️ Feliz mais um mês juntos! ❤️";
+                if(banner) {
+                    banner.style.display = "block";
+                    const meses = (agora.getFullYear() - dataInicio.getFullYear()) * 12 + (agora.getMonth() - dataInicio.getMonth());
+                    if (meses > 0 && meses % 12 === 0) {
+                        textoBanner.innerText = `🎉 Feliz ${meses/12} Ano(s) de Namoro! 🎉`;
+                    } else {
+                        textoBanner.innerText = "❤️ Feliz mais um mês juntos! ❤️";
+                    }
                 }
             }
         }
@@ -305,7 +253,9 @@
             const btn = document.getElementById('btn-revelar');
             const campoFrase = document.getElementById('frase-dinamica');
             
-            if (musica.paused) musica.play();
+            if (musica.paused) {
+                musica.play().catch(e => console.log("Áudio bloqueado ou não encontrado"));
+            }
 
             carta.style.display = "block";
             btn.innerText = "Sortear Outra Frase ✨";
@@ -318,7 +268,7 @@
             }, 200);
 
             chuvaDeCoracoes();
-            if(carta.classList.contains('revelada') === false) {
+            if(!carta.classList.contains('revelada')) {
                 carta.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 carta.classList.add('revelada');
             }
