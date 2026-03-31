@@ -63,17 +63,29 @@
             margin: 0 auto;
         }
 
+        /* AJUSTE NO CARD PARA POLAROID COM LEGENDA */
         .foto-card {
             background: white;
-            padding: 12px 12px 35px 12px;
+            padding: 12px 12px 50px 12px; /* Espaço extra embaixo para o texto */
             border-radius: 2px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             transition: var(--transicao);
             cursor: pointer;
+            position: relative;
         }
 
         .foto-card:hover { transform: scale(1.05) rotate(1deg); z-index: 5; }
-        .foto-card img { width: 100%; height: 250px; object-fit: cover; filter: sepia(20%); background-color: #eee; }
+        .foto-card img { width: 100%; height: 600px; object-fit: cover; filter: sepia(20%); background-color: #eee; }
+
+        /* ESTILO DA LEGENDA NA POLAROID */
+        .legenda-foto {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.3rem;
+            color: #3d2630;
+            text-align: center;
+        }
 
         #lightbox {
             display: none;
@@ -84,8 +96,16 @@
             justify-content: center;
             align-items: center;
             cursor: zoom-out;
+            flex-direction: column;
         }
-        #lightbox img { max-width: 90%; max-height: 80%; border: 5px solid white; }
+        #lightbox img { max-width: 90%; max-height: 70%; border: 5px solid white; }
+        #legenda-ampliada { 
+            color: white; 
+            font-family: 'Dancing Script', cursive; 
+            font-size: 2rem; 
+            margin-top: 20px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
 
         .surpresa-container { margin: 40px 0; }
         .botao-surpresa {
@@ -145,6 +165,7 @@
 
     <div id="lightbox" onclick="this.style.display='none'">
         <img src="" id="img-ampliada">
+        <p id="legenda-ampliada"></p>
     </div>
 
     <header>
@@ -167,15 +188,42 @@
     </header>
 
     <div class="galeria">
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto1.jpg" loading="lazy"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto2.jpg" loading="lazy"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto3.jpg" loading="lazy"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto4.jpg" loading="lazy"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto5.jpg" loading="lazy"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto6.jpg" loading="lazy"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto7.jpg" loading="lazy"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto8.jpg" loading="lazy"></div>
-        <div class="foto-card" onclick="ampliar(this)"><img src="foto9.jpg" loading="lazy"></div>
+        <div class="foto-card" onclick="ampliar(this)">
+            <img src="foto1.jpg" loading="lazy">
+            <span class="legenda-foto">Onde tudo começou </span>
+        </div>
+        <div class="foto-card" onclick="ampliar(this)">
+            <img src="foto2.jpg" loading="lazy">
+            <span class="legenda-foto">️Nossa primeira ida ao shopping</span>
+        </div>
+        <div class="foto-card" onclick="ampliar(this)">
+            <img src="foto3.jpg" loading="lazy">
+            <span class="legenda-foto">Eu amo seu sorriso nessa foto</span>
+        </div>
+        <div class="foto-card" onclick="ampliar(this)">
+            <img src="foto4.jpg" loading="lazy">
+            <span class="legenda-foto">Nosso primeiro arraiá</span>
+        </div>
+        <div class="foto-card" onclick="ampliar(this)">
+            <img src="foto5.jpg" loading="lazy">
+            <span class="legenda-foto">Primeiro Natal de muitos</span>
+        </div>
+        <div class="foto-card" onclick="ampliar(this)">
+            <img src="foto6.jpg" loading="lazy">
+            <span class="legenda-foto">Minha melhor companhia</span>
+        </div>
+        <div class="foto-card" onclick="ampliar(this)">
+            <img src="foto7.jpg" loading="lazy">
+            <span class="legenda-foto">Também amo seu sorriso nessa foto</span>
+        </div>
+        <div class="foto-card" onclick="ampliar(this)">
+            <img src="foto8.jpg" loading="lazy">
+            <span class="legenda-foto">Nossa primeira viagem para Aparecida</span>
+        </div>
+        <div class="foto-card" onclick="ampliar(this)">
+            <img src="foto9.jpg" loading="lazy">
+            <span class="legenda-foto">Nosso primeiro PHN</span>
+        </div>
     </div>
 
     <div class="surpresa-container">
@@ -183,7 +231,7 @@
         <p id="frase-dinamica"></p>
 
         <div id="carta" class="carta-escondida">
-            "Morzinho, desde que te conheci, minha vida tem sido muito melhor, obrigado por sempre estar ao meu lado e sempre me apoiar em tudo que faço, tenho certeza que fiz a melhor escolha de quem eu vou passar o resto da minha vida, eu te amo minha princesa!"
+            "Oi amor, espero que tenha gostado do presente que te fiz, preparei isso tudo com muitonl amor e carinho para você, você veio pra mudar a minha vida para melhor, cada vez mais tenho a plena certeza de que é com você que quero passar o resto da mimha vida, você é a resposta de todas as minhas orações,eu te amo muito minha princesa!"
         </div>
     </div>
 
@@ -242,10 +290,18 @@
             }
         }
 
+        // FUNÇÃO AMPLIAR ATUALIZADA
         function ampliar(el) {
             const lb = document.getElementById('lightbox');
             const img = document.getElementById('img-ampliada');
+            const legendaLB = document.getElementById('legenda-ampliada');
+            
             img.src = el.querySelector('img').src;
+            
+            // Busca o texto da legenda dentro do card clicado
+            const textoLegenda = el.querySelector('.legenda-foto').innerText;
+            legendaLB.innerText = textoLegenda;
+            
             lb.style.display = 'flex';
         }
 
